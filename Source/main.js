@@ -1,7 +1,7 @@
 
 (function() {
     'use strict';
-
+    let timerId = 0;
     function setupVideoListener() {
         const video = document.querySelector('video');
         if (video) {
@@ -55,15 +55,14 @@
             // Append the container to the video's parent
             video.parentNode.parentNode.appendChild(buttonContainer);
 
-            // Show the container when the video is hovered
-            video.parentNode.parentNode.onmouseenter = () => {
-                buttonContainer.style.display = 'block';
-            };
-
-            // Hide the container when mouse leaves the video
-            video.parentNode.parentNode.onmouseleave = () => {
-                buttonContainer.style.display = 'none';
-            };
+            video.parentNode.parentNode.onmousemove = () => {
+                // set timer for 2 seconds to hide the button container
+                buttonContainer.style.display = 'block'
+                clearTimeout(timerId);
+                timerId = setTimeout(() => {
+                    buttonContainer.style.display = 'none';
+                }, 2000);
+            }
         }
     }
 
