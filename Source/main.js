@@ -31,10 +31,6 @@
                 const savedTime = parseFloat(GM_getValue('videoTimestamp_' + document.URL, 0));
                 if (video && savedTime) {
                     video.currentTime = savedTime;
-                    if(video.paused)
-                    {
-                        video.play();
-                    }
                 }
             });
 
@@ -62,7 +58,11 @@
                 timerId = setTimeout(() => {
                     buttonContainer.style.display = 'none';
                 }, 2000);
-            }
+            };
+
+            video.parentNode.parentNode.onmouseleave = () => {
+                buttonContainer.style.display = 'none';
+            };
         }
     }
 
