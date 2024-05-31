@@ -52,12 +52,15 @@
             video.parentNode.parentNode.appendChild(buttonContainer);
 
             video.parentNode.parentNode.onmousemove = () => {
-                // set timer for 2 seconds to hide the button container
-                buttonContainer.style.display = 'block'
-                clearTimeout(timerId);
-                timerId = setTimeout(() => {
-                    buttonContainer.style.display = 'none';
-                }, 2000);
+                const savedTime = parseFloat(GM_getValue('videoTimestamp_' + document.URL, 0));
+                if(savedTime > 0) {
+                    // set timer for 2 seconds to hide the button container
+                    buttonContainer.style.display = 'block'
+                    clearTimeout(timerId);
+                    timerId = setTimeout(() => {
+                        buttonContainer.style.display = 'none';
+                    }, 2000);
+                }
             };
 
             video.parentNode.parentNode.onmouseleave = () => {
